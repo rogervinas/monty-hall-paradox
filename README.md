@@ -2,4 +2,4 @@
 
 https://en.wikipedia.org/wiki/Monty_Hall_problem
 
-See it in action in http://htmlpreview.github.com/?https://github.com/rogervinas/monty-hall-paradox/blob/master/index.html
+See it in action in https://rogervinas.github.io/monty-hall-paradox/
