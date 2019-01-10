@@ -1,0 +1,72 @@
+<html>
+<head>
+  <script
+    src="https://code.jquery.com/jquery-3.3.1.min.js"
+    integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+    crossorigin="anonymous">
+  </script>
+  <script type="text/javascript">
+    window.onload=function() {
+
+      function random(min, max) {
+      	return Math.floor(Math.random()*(max-min+1)+min);
+      }
+
+      function MontyHallGame() {
+        this.prizeDoor = random(0, 2);
+        this.nextDoor = function(door, n) {
+        	return (door+n) % 3;
+        };
+        this.chooseDoor = function(door) {
+        	this.chosenDoor = door % 3;
+          if (this.chosenDoor == this.prizeDoor) {
+          	this.openedDoor = [this.nextDoor(this.prizeDoor, 1), this.nextDoor(this.prizeDoor, 2)][random(0, 1)];
+          } else if (this.chosenDoor == this.nextDoor(this.prizeDoor, 1)) {
+          	this.openedDoor = this.nextDoor(this.prizeDoor, 2);
+          } else {
+          	this.openedDoor = this.nextDoor(this.prizeDoor, 1);
+          }
+        };
+        this.switchDoor = function() {
+        	if (this.openedDoor == this.nextDoor(this.chosenDoor, 1)) {
+          	this.chosenDoor = this.nextDoor(this.chosenDoor, 2);
+          } else {
+          	this.chosenDoor = this.nextDoor(this.chosenDoor, 1);
+          }
+        };
+        this.win = function() {
+        	return this.chosenDoor == this.prizeDoor;
+        }
+      }
+
+      var runs = 0;
+      var wins = 0;
+
+      setInterval(function() {
+      	var game = new MontyHallGame();
+        game.chooseDoor(random(0, 2));
+        game.switchDoor();
+
+        runs++;
+        if (game.win()) {
+        	wins++;
+        }
+      }, 10);
+
+      setInterval(function() {
+        $("#runs").text(runs);
+        $("#wins").text(parseFloat(100*(wins/runs)).toFixed(2) + '%');
+      }, 1000);
+    }
+  </script>
+</head>
+<body>
+    <div>
+  <table border="1">
+    <tbody><tr><td>Number of runs</td><td id="runs">10674</td></tr>
+    <tr><td>Wins switching</td><td id="wins">66.52%</td></tr>
+  </tbody></table>
+  <br>
+</div>
+</body>
+</html>

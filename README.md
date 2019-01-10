@@ -1,2 +1,3 @@
-# monty-hall-paradox
-Monty Hall Paradox empiric proof
+# Monty Hall Paradox
+
+https://en.wikipedia.org/wiki/Monty_Hall_problem
